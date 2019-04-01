@@ -239,4 +239,9 @@ public class GlobalMachine
 		}
 	}
 
+	public boolean checkX()
+	{
+		return x == tape[cursor];
+	}
+
 }

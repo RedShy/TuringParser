@@ -1,11 +1,13 @@
 package turingparser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Machine
 {
 	private String name;
-	private ArrayList<Sequence> sequenceCommands = new ArrayList<>();
+	private Map<Integer,Sequence> sequenceCommands = new HashMap<>();
 
 	public String getName()
 	{
@@ -17,12 +19,8 @@ public class Machine
 		this.name = name;
 	}
 
-	public ArrayList<Sequence> getSequenceCommands()
-	{
-		return sequenceCommands;
-	}
 
-	public void setSequenceCommands(ArrayList<Sequence> sequenceCommands)
+	public void setSequenceCommands(Map<Integer, Sequence> sequenceCommands)
 	{
 		this.sequenceCommands = sequenceCommands;
 	}

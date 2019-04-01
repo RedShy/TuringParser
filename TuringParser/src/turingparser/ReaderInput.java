@@ -3,13 +3,15 @@ package turingparser;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ReaderInput
 {
-	public ArrayList<Sequence> readInput(String path) throws FileNotFoundException
+	public Map<Integer,Sequence> readInput(String path) throws FileNotFoundException
 	{
-		ArrayList<Sequence> sequences = new ArrayList<>();
+		Map<Integer,Sequence> sequences = new HashMap<>();
 		Scanner in = new Scanner(new FileReader(path));
 		int nLine=0;
 		while (in.hasNextLine())
@@ -23,7 +25,9 @@ public class ReaderInput
 			}
 			else
 			{
-				sequences.add(new Sequence(line));
+				String[] parts = line.split(":");
+				
+				sequences.put(Integer.parseInt(parts[0]), new Sequence(line));
 			}
 			nLine++;
 		}

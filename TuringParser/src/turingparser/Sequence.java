@@ -129,11 +129,11 @@ public class Sequence
 				{
 					always=true;
 				}
-				else if(symbols[j].charAt(0) == 'x')
+				else if(symbols[j].charAt(0) == 'X')
 				{
 					x=true;
 				}
-				else if(symbols[j].charAt(0) == 'w')
+				else if(symbols[j].charAt(0) == 'W')
 				{
 					w=true;
 				}

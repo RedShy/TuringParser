@@ -27,46 +27,35 @@ public class Chooser
 		{
 			return true;
 		}
-
-		for (int i = 0; i < symbols.size(); i++)
+		
+		if (x)
 		{
-			if (x || w)
+			if (not)
 			{
-				if (not)
-				{
-					if (x && GlobalMachine.getGlobalMachine().getX() != symbols.get(i))
-					{
-						return true;
-					}
-
-					if (w && GlobalMachine.getGlobalMachine().getW() != symbols.get(i))
-					{
-						return true;
-					}
-				} else
-				{
-					if (x && GlobalMachine.getGlobalMachine().getX() == symbols.get(i)
-							&& GlobalMachine.getGlobalMachine().checkSymbol(symbols.get(i)))
-					{
-						System.out.println("VEROO!!!! x= " + GlobalMachine.getGlobalMachine().getX() + " sotto= "
-								+ symbols.get(i));
-						return true;
-					}
-
-					if (w && GlobalMachine.getGlobalMachine().getW() == symbols.get(i)
-							&& GlobalMachine.getGlobalMachine().checkSymbol(symbols.get(i)))
-					{
-						return true;
-					}
-				}
-			} else
-			{
-				if (not && !GlobalMachine.getGlobalMachine().checkSymbol(symbols.get(i)))
+				if (!GlobalMachine.getGlobalMachine().checkX())
 				{
 					return true;
 				}
+			} else
+			{
+				if (GlobalMachine.getGlobalMachine().checkX())
+				{
+					return true;
+				}
+			}
+		}
 
-				if (!not && GlobalMachine.getGlobalMachine().checkSymbol(symbols.get(i)))
+		for (int i = 0; i < symbols.size(); i++)
+		{
+			if (not)
+			{
+				if(!GlobalMachine.getGlobalMachine().checkSymbol(symbols.get(i)))
+				{
+					return true;
+				}
+			} else
+			{
+				if(GlobalMachine.getGlobalMachine().checkSymbol(symbols.get(i)))
 				{
 					return true;
 				}
