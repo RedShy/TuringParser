@@ -30,6 +30,7 @@ public class Machine
 		int nextSequence = 0;
 		while (nextSequence != -1)
 		{
+			System.out.println("ESEGUO SEQUENZA: "+nextSequence);
 			nextSequence = sequenceCommands.get(nextSequence).execute();
 		}
 	}
