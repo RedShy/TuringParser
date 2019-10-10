@@ -51,11 +51,11 @@ public class TuringParser
 			
 			if(t.resultState == EndStateMachine.HALT)
 			{
-				if(!GlobalMachine.getGlobalMachine().getTape().toString().equals(t.output))
+				if(!String.valueOf(GlobalMachine.getGlobalMachine().getTape()).equals(t.output))
 				{
 					System.out.println("TEST FALLITO CON LA STRINGA: "+t.input);
 					System.out.println("OUTPUT RICHIESTO: "+t.output);
-					System.out.println("OUTPUT FORNITO: "+ String.valueOf(GlobalMachine.getGlobalMachine().getTape()));
+					System.out.println("OUTPUT FORNITO: "+ String.valueOf(GlobalMachine.getGlobalMachine().getTape()));				
 					goodRun = false;
 					break;
 				}
