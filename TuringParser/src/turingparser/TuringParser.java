@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -48,10 +49,13 @@ public class TuringParser
 			GlobalMachine.getGlobalMachine().setInput(t.input.toCharArray());
 			GlobalMachine.getGlobalMachine().print();
 			m.execute();
-			
+						
 			if(t.resultState == EndStateMachine.HALT)
 			{
-				if(!String.valueOf(GlobalMachine.getGlobalMachine().getTape()).equals(t.output))
+				ArrayList<Character> erasedOutput = eraseBlank(t.output.toCharArray());
+				ArrayList<Character> erasedTape = eraseBlank(GlobalMachine.getGlobalMachine().getTape());
+								
+				if(!(erasedTape.toString().equals(erasedOutput.toString())) )
 				{
 					System.out.println("TEST FALLITO CON LA STRINGA: "+t.input);
 					System.out.println("OUTPUT RICHIESTO: "+t.output);
@@ -78,5 +82,24 @@ public class TuringParser
 			System.out.println("TUTTI I TEST SONO OKAY!");
 		}
 	}
+
+	private static ArrayList<Character> eraseBlank(char[] output)
+	{
+		ArrayList<Character> erasedOutput = new ArrayList<>();
+		int i = 0;
+		while(i < output.length && output[i] == 'B')
+		{
+			i++;
+		}
+		
+		while(i < output.length && output[i] != 'B')
+		{
+			erasedOutput.add(output[i]);
+			i++;
+		}
+		return erasedOutput;
+	}
+	
+	
 
 }
