@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class GlobalMachine
 {
 	public static final char BLANK = 'B';
-	public static final int DEFAULT_SIZE = 30;
+	public static final int DEFAULT_SIZE = 60;
 
 	private char[] tape;
 	private int cursor;
