@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -33,5 +34,37 @@ public class ReaderInput
 		}
 		in.close();
 		return sequences;
+	}
+
+	public List<TestInput> readTests(String path) throws FileNotFoundException
+	{
+		List<TestInput> tests = new ArrayList<>();
+		Scanner in = new Scanner(new FileReader(path));
+		System.out.println("TESTS");
+		while (in.hasNextLine())
+		{
+			String line = in.nextLine();
+			System.out.println(line);
+			
+			String[] parts = line.split(":");
+			EndStateMachine state = EndStateMachine.HALT;
+			switch(parts[1])
+			{
+				case "y":
+					state = EndStateMachine.YES;
+					break;
+				case "n":
+					state = EndStateMachine.NO;
+					break;
+			}
+			
+			String output = "";
+			if(parts.length == 3)
+				output=GlobalMachine.generateTapeWithString(parts[2]);
+				
+			tests.add(new TestInput(parts[0],state,output));
+		}
+		in.close();
+		return tests;
 	}
 }

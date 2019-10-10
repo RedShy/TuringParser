@@ -26,13 +26,9 @@ public class GlobalMachine
 	}
 
 	private GlobalMachine()
-	{
-		tape = new char[DEFAULT_SIZE];
-		for (int i = 0; i < DEFAULT_SIZE; i++)
-		{
-			tape[i] = BLANK;
-		}
-	}
+	{}
+
+
 
 	public char[] getTape()
 	{
@@ -176,16 +172,33 @@ public class GlobalMachine
 
 	public void setInput(char[] input)
 	{
-		cursor = (DEFAULT_SIZE / 4);
-
-		for (int i = 0; i < input.length; i++)
-		{
-			tape[cursor] = input[i];
-			cursor++;
-		}
+		tape = generateTapeWithString(String.copyValueOf(input)).toCharArray();
 
 		cursor = (DEFAULT_SIZE / 4) - 1;
+	}
+	
+	public static String generateTapeWithString(String input)
+	{
+		char[] tape = generateNewTape();
+		
+		int cursor = (DEFAULT_SIZE / 4);
 
+		for (int i = 0; i < input.length(); i++)
+		{
+			tape[cursor] = input.charAt(i);
+			cursor++;
+		}
+		return String.copyValueOf(tape);
+	}
+	
+	private static char[] generateNewTape()
+	{
+		char[] tape = new char[DEFAULT_SIZE];
+		for (int i = 0; i < DEFAULT_SIZE; i++)
+		{
+			tape[i] = BLANK;
+		}
+		return tape;
 	}
 
 	public void print()

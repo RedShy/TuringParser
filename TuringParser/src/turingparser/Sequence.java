@@ -21,7 +21,7 @@ public class Sequence
 	public Sequence(String sequence)
 	{
 		String[] parts = sequence.split(":");
-		
+	
 		if(parts.length<2)
 			return;
 		createCommands(parts[1]);
