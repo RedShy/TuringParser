@@ -20,10 +20,22 @@ public class TuringParser
 		
 		m.setSequenceCommands(ri.readInput("./machine.txt"));
 		
-		GlobalMachine.getGlobalMachine().print();
-		m.execute();
-		
-		//launchTests(m, ri);
+	    if(args.length > 0)
+	    {
+	    	if(args[0].equals("-t"))
+	    	{
+	    		launchTests(m, ri);
+	    	}
+	    	else
+	    	{
+	    		System.err.println("Usare -t per lanciare i test o niente per eseguire solo la stringa in input");
+	    	}
+	    }
+	    else
+	    {
+			GlobalMachine.getGlobalMachine().print();
+			m.execute();
+	    }
 	}
 
 	private static void launchTests(Machine m, ReaderInput ri) throws FileNotFoundException
