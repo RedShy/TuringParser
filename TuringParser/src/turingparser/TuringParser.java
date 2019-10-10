@@ -1,6 +1,7 @@
 package turingparser;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,6 +20,14 @@ public class TuringParser
 		
 		m.setSequenceCommands(ri.readInput("./machine.txt"));
 		
+		GlobalMachine.getGlobalMachine().print();
+		m.execute();
+		
+		//launchTests(m, ri);
+	}
+
+	private static void launchTests(Machine m, ReaderInput ri) throws FileNotFoundException
+	{
 		boolean goodRun=true;
 		List<TestInput> tests=ri.readTests("./tests.txt");
 		for(TestInput t: tests)
