@@ -60,8 +60,12 @@ public class ReaderInput
 			
 			String output = "";
 			if(parts.length == 3)
-				output=GlobalMachine.generateTapeWithString(parts[2]);
-				
+				output = GlobalMachine.generateTapeWithString(parts[2]);
+			else if(parts.length < 3 && state == EndStateMachine.HALT)
+			{
+				output = GlobalMachine.generateTapeWithString("");
+			}
+			
 			tests.add(new TestInput(parts[0],state,output));
 		}
 		in.close();
