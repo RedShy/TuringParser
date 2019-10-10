@@ -1,0 +1,65 @@
+Manuale Turing Parser
+Variabili
+X = fa l'assegnamento con la cella corrente
+x = scrive la variabile x sulla cella corrente
+
+W e w sono analoghe a X e x.
+
+Quando codifichi un passaggio di stato con assegnamento di variabile, metti il chooser normalmente con la sequenza di simboli. Devi mettere una sequenza aggiuntiva tra le due parti con il solo comando di store della varabile e che invia always alla sequenza target.
+
+Anche quando hai un "a destra finché" con assegnamento di variabile va splittato in 2 comandi. Esempio: R_x<-a diventa "R_a X" cioè vai a destra fino ad 'a' e poi memorizza la cella corrente in X.
+
+Per codificare passaggi di stato del tipo x = 'a' oppure w = 'b' devi mettere la x o la w (o entrambe) nella lista dei simboli.
+
+Vedi foto allegata per la codifica di R_x o L_x. Praticamente diventa R_x M1 = R (cicla su se stesso con not x) - x -> M1
+
+La sintassi per avere il chooser della variabile è così: X_sequenza1 n,X_sequenza2. Dove la sequenza 1 se la variabile è uguale alla cella corrente e sequenza 2 se è diversa. Non ci deve essere nient'altro nella riga.
+
+Vedi foto per questa macchina
+00#01010#00011#1000
+0:R_B # L_B:A_1
+1:R_#:A_2
+2:R:B_3 0,1_4
+3:n:
+4:X R_# L:X_5 n,X_6
+5:$:A_7
+6:L_# @ L_B:A_8
+7:L:#_9 n,#_10
+9:$:A_1
+10:$:A_7
+8:R:$_8 0,1_12 @_11
+11:R_# L L:T_19 n,T_15
+12:X & R_@ R:A_13
+13:R_n,T:X_14 n,X_15
+14:T L_& x:A_8
+15:L_@:A_16
+16:$:A_17
+17:R:#_2 n,#_18
+18:$:A_17
+19:R_#:A_20
+20:y:
+
+La stringa in input va messa nella prima riga.
+B indica blank.
+Il file è composto da una serie di sequenza, ogni sequenza deve avere un numero univoco.
+La sequenza è composta da 3 pezzi separati da ':' Identicativo univoco:comandi sequenza:choosers.
+I choosers rappresentano le frecce, indicano in quale sequenza andare dopo aver terminato una sequenza. Se non c'è nessuna condizione semplicemente si mette A_numeroSequenza
+La sintassi è questa: una serie di virgole indicano un or
+Le variabili vengono indicate con X e W grandi. X e W grande significa leggi il contenuto della cella e salvalo in X/W. x e w piccolo indicano di scrivere il contenuto della variabile nella cella corrente.
+
+Esempio:
+13:R_n,T:X_14 n,X_15
+	13 è l'identificativo univoco della sequenza
+	R_n,T significa vai a destra finché non trovi not T, cioè un carattere diverso da T
+	X_14 significa se la cella corrente ha un valore uguale a X vai alla sequenza 14
+	n,X_15 significa se la cella corrente ha un valore diverso da X vai alla sequenza 15
+
+Se vuoi usare la compilazione su Turing Machine Simulator By VittGam devi cambiare le lettere dell'alfabeto in numeri o simboli che non siano lettere. Tipo aabb devi scrivere 0011. Devi lasciare uno spazio all'inizio quando inserisci la stringa.
+
+Ho aggiunto una serie di tests da inserire nel file tests.txt
+Ogni test è costituito da 3 pezzi stringaInput:statoRichiesto:outputRichiesto
+L'ouput viene controllato solo se lo stato richiesto dal test è h, altrimenti viene confrontato solo lo stato della macchina con quello richiesto
+
+USO DEL FILE JAR
+-t per lanciare i test
+niente per lanciarlo con la stringa in input
