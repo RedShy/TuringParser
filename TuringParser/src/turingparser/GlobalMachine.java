@@ -91,17 +91,28 @@ public class GlobalMachine
 
 	}
 
-	public void moveRight()
+	public void moveRight() throws OutOfTapeException
 	{
 		cursor++;
+		
+		if(cursor >= DEFAULT_SIZE)
+		{
+			throw new OutOfTapeException("Comando Right: superata dimensione tape");
+		}
 	}
 
-	public void moveRightUntil(ArrayList<Character> symbols)
+	public void moveRightUntil(ArrayList<Character> symbols) throws OutOfTapeException
 	{
 		boolean found = false;
 		while (!found)
 		{
 			cursor++;
+			
+			if(cursor >= DEFAULT_SIZE)
+			{
+				throw new OutOfTapeException("Comando Right Until: caratteri " + symbols.toString()+" non trovati sul nastro");
+			}
+			
 			for (int i = 0; i < symbols.size(); i++)
 			{
 				if (tape[cursor] == symbols.get(i))
@@ -112,12 +123,18 @@ public class GlobalMachine
 		}
 	}
 
-	public void moveRightUntilNot(ArrayList<Character> symbols)
+	public void moveRightUntilNot(ArrayList<Character> symbols) throws OutOfTapeException
 	{
 		boolean found = false;
 		while (!found)
 		{
 			cursor++;
+			
+			if(cursor >= DEFAULT_SIZE)
+			{
+				throw new OutOfTapeException("Comando Right Until Not: caratteri " + symbols.toString()+" trovati sempre sul nastro");
+			}
+			
 			for (int i = 0; i < symbols.size(); i++)
 			{
 				if (tape[cursor] != symbols.get(i))
@@ -128,17 +145,28 @@ public class GlobalMachine
 		}
 	}
 
-	public void moveLeft()
+	public void moveLeft() throws OutOfTapeException
 	{
 		cursor--;
+		
+		if(cursor < 0)
+		{
+			throw new OutOfTapeException("Comando Left: superata dimensione tape");
+		}
 	}
 
-	public void moveLeftUntil(ArrayList<Character> symbols)
+	public void moveLeftUntil(ArrayList<Character> symbols) throws OutOfTapeException
 	{
 		boolean found = false;
 		while (!found)
 		{
 			cursor--;
+			
+			if(cursor < 0)
+			{
+				throw new OutOfTapeException("Comando Left Until: caratteri " + symbols.toString()+" non trovati sul nastro");
+			}
+			
 			for (int i = 0; i < symbols.size(); i++)
 			{
 				if (tape[cursor] == symbols.get(i))
@@ -149,12 +177,18 @@ public class GlobalMachine
 		}
 	}
 
-	public void moveLeftUntilNot(ArrayList<Character> symbols)
+	public void moveLeftUntilNot(ArrayList<Character> symbols) throws OutOfTapeException
 	{
 		boolean found = false;
 		while (!found)
 		{
 			cursor--;
+			
+			if(cursor < 0)
+			{
+				throw new OutOfTapeException("Comando Left Until Not: caratteri " + symbols.toString()+" trovati sempre sul nastro");
+			}
+			
 			for (int i = 0; i < symbols.size(); i++)
 			{
 				if (tape[cursor] != symbols.get(i))

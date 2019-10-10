@@ -13,7 +13,7 @@ public class Machine
 	{
 		return name;
 	}
-
+	
 	public void setName(String name)
 	{
 		this.name = name;
@@ -31,7 +31,14 @@ public class Machine
 		while (nextSequence != -1)
 		{
 			System.out.println("ESEGUO SEQUENZA: "+nextSequence);
-			nextSequence = sequenceCommands.get(nextSequence).execute();
+			try
+			{
+				nextSequence = sequenceCommands.get(nextSequence).execute();
+			} catch (OutOfTapeException e)
+			{
+				e.printStackTrace();
+				nextSequence = -1;
+			}
 		}
 	}
 

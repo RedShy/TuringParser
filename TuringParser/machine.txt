@@ -1,6 +1,6 @@
-aabb
-0:R:B_4 b_3 a_1
-1:B R_B L:b_2 B,a_3
-2:B L_B:A_0
-3:n:
-4:y:
+abc
+0:R:B_1 n,B_2
+1:h:
+2:X $ R_B # R x:A_3
+3:L_$ x R:#_1 n,#_4
+4:X R_B x:A_3

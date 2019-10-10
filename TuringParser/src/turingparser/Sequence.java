@@ -147,7 +147,7 @@ public class Sequence
 		}
 	}
 
-	public int execute()
+	public int execute() throws OutOfTapeException
 	{
 		for (int i = 0; i < commands.size(); i++)
 		{

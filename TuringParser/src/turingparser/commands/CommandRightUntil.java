@@ -3,6 +3,7 @@ package turingparser.commands;
 import java.util.ArrayList;
 
 import turingparser.GlobalMachine;
+import turingparser.OutOfTapeException;
 
 public class CommandRightUntil extends Command
 {
@@ -17,7 +18,7 @@ public class CommandRightUntil extends Command
 	}
 
 	@Override
-	public void execute()
+	public void execute() throws OutOfTapeException
 	{
 		if(not)
 		{
